@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Atera Search Redirect</title>
+    <script>
+        // On page load, process the query and redirect
+        function redirect() {
+            // Get the search query from the URL (?q=)
+            const params = new URLSearchParams(window.location.search);
+            const searchTerm = params.get('q') || '';
+
+            // Build the JSON payload
+            const payload = {
+                agentFields: true,
+                customers: true,
+                query: searchTerm
+            };
+
+            // Encode to Base64
+            const encodedPayload = btoa(JSON.stringify(payload));
+
+            // Redirect to Atera
+            const ateraUrl = `https://app.atera.com/new/advancedsearch/${encodedPayload}`;
+            window.location.href = ateraUrl;
+        }
+
+        redirect();
+    </script>
+</head>
+<body>
+    <p>Redirecting to Atera...</p>
+</body>
+</html>
